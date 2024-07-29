@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus2.5</title>
+    <link rel="stylesheet" href="styleteo2.css">
+    <style>
+        .response-content {
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="text3">
+    <h2>CHOOSE TEST TYPE</h2>
+</div>
+<button id="multiplechoiceButton" class="multiple">MULTIPLE CHOICE</button>
+<br>
+<button id="missingwordsButton" class="missing">SIMPLE ANSWER</button>
+<br>
+
+<script>
+    function setTestTypeAndRedirect(type) {
+        localStorage.setItem('testType', type);
+        window.location.href = 'lotuspagina3.html';
+    }
+
+    document.getElementById('multiplechoiceButton').onclick = function() {
+        setTestTypeAndRedirect('grila doar cu 3 variante a,b,c,dintre care doar una sa fie corecta (nu afisa raspunsul corect) ');
+    };
+
+    document.getElementById('missingwordsButton').onclick = function() {
+        setTestTypeAndRedirect('intrebare cu raspuns in scris (nu afisa raspunsul corect) ');
+    };
+</script>
+</body>
+</html>

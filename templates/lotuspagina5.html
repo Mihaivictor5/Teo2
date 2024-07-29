@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus 5</title>
+    <link rel="stylesheet" href="styleteo2.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: white;
+        }
+        .answer-container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            margin-bottom: 20px; /* Add margin bottom for spacing */
+        }
+        .answer-content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .button-container {
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0066cc;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+<div class="answer-container">
+    <div id="apiResponse" class="answer-content"></div>
+
+    <!-- Button container moved under the response content -->
+    <div class="button-container">
+        <button id="backButton">Back</button>
+        <button id="nextButton">Next</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const answer = localStorage.getItem('userAnswer');
+        const text = localStorage.getItem('extractedText');
+        const test = localStorage.getItem('apiResponse');
+
+        if (!answer || !text || !test) {
+            document.getElementById('apiResponse').innerText = 'No answer, text, or test found';
+            return;
+        }
+
+        const response = await fetch(`http://127.0.0.1:5000/submit-answer?answer=${encodeURIComponent(answer)}&text=${encodeURIComponent(text)}&test=${encodeURIComponent(test)}`);
+        const data = await response.json();
+
+        document.getElementById('apiResponse').innerText = data.response ? data.response : 'No response received';
+    });
+
+    document.getElementById('backButton').addEventListener('click', () => {
+        localStorage.clear();
+        window.location.href = 'lotuspagina1.html'; // Redirect to lotuspagina1.html
+    });
+
+    document.getElementById('nextButton').addEventListener('click', () => {
+        window.location.href = 'lotuspagina3.5.html'; // Redirect to lotuspagina2.5.html
+    });
+</script>
+</body>
+</html>

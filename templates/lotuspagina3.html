@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus3</title>
+    <link rel="stylesheet" href="styleteo2.css">
+    <style>
+        .response-content {
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="text3">
+    <h2>CHOOSE DIFFICULTY</h2>
+</div>
+<button id="generalButton" class="general">TRIVIAL</button>
+<br>
+<button id="mediumButton" class="medium">MEDIUM</button>
+<br>
+<button id="expertButton" class="expert">EXPERT</button>
+
+<script>
+    async function createTest(difficulty) {
+        const text = localStorage.getItem('extractedText');
+        const testType = localStorage.getItem('testType');
+        
+        if (!text) {
+            alert('No text found. Please upload a PDF first.');
+            return;
+        }
+
+        localStorage.setItem('difficulty', difficulty); // Store difficulty for use in lotuspagina3.5.html
+        window.location.href = 'lotuspagina3.5.html';
+    }
+
+    document.getElementById('generalButton').addEventListener('click', () => createTest('TRIVIAL'));
+    document.getElementById('mediumButton').addEventListener('click', () => createTest('MEDIUM'));
+    document.getElementById('expertButton').addEventListener('click', () => createTest('EXPERT'));
+</script>
+</body>
+</html>
